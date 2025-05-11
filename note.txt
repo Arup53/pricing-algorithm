@@ -1,0 +1,4 @@
+npm i -D typescript @types/node @types/express @tsconfig/node22  
+npx tsc --init 
+npm i -D tsx           
+npx tsx src/index.ts
