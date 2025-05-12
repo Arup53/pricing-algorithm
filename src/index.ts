@@ -1,3 +1,7 @@
+import { PrismaClient } from "./generated/prisma";
+
+const prisma = new PrismaClient();
+
 async function updateProductPrices() {
   try {
     // Fake products data
@@ -100,4 +104,19 @@ async function updateProductPrices() {
 }
 
 // Run immediately (or you can still schedule it)
-updateProductPrices();
+// updateProductPrices();
+
+async function postData(price: any, expiraryDate: any, category: any) {
+  const newUser = await prisma.product.create({
+    data: {
+      originalPrice: price,
+      expiryDate: expiraryDate,
+      category: category,
+    },
+  });
+
+  console.log(newUser);
+}
+
+postData(200, "2025-05-18T00:00:00.000Z", "Snacks");
+postData(150, "2025-05-25T00:00:00.000Z", "Snacks");
