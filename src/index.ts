@@ -73,6 +73,15 @@ async function updateProductPrices() {
       const minPrice = originalPrice * min_price_ratio;
       newPrice = Math.max(newPrice, minPrice);
 
+      const updatePrice = await prisma.product.update({
+        data: {
+          originalPrice: newPrice,
+        },
+        where: {
+          id: id,
+        },
+      });
+      console.log(updatePrice);
       console.log(`Product ${id} (${category}):`);
       console.log(`  Original Price: ₹${originalPrice}`);
       console.log(`  Days to Expiry: ${daysToExpiry}`);
